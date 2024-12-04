@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Library Management API
+  description: API specification for a library management
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/NAJAINAANDRIAMAMPIAN/Library_management/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths: {}
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the book.
+        bookName:
+          type: string
+          description: The book's name.
+        author:
+          type: string
+          description: The book author's name.
+        pageNumbers:
+          type: integer
+          description: Number of pages in the book.
+        topic:
+          type: string
+          description: The book's genre.
+          enum:
+          - ROMANCE
+          - COMEDY
+          - OTHER
+        releaseDate:
+          type: string
+          description: Book's release date.
+          format: date
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Author's unique identifierr.
+        name:
+          type: string
+          description: Author's name.
+        sex:
+          type: string
+          description: Author's gender.
+          enum:
+          - M
+          - F
