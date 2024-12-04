@@ -6,7 +6,148 @@ info:
 servers:
 - url: https://virtserver.swaggerhub.com/NAJAINAANDRIAMAMPIAN/Library_management/1.0.0
   description: SwaggerHub API Auto Mocking
-paths: {}
+paths:
+  /books:
+    get:
+      summary: Get a list of books
+      description: Retrieve a list of books with optional filters for bookName and
+        releaseDate range.
+      parameters:
+      - name: bookName
+        in: query
+        description: Filter books by their name.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: startReleaseDate
+        in: query
+        description: Start of the release date range.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: endReleaseDate
+        in: query
+        description: End of the release date range.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      responses:
+        "200":
+          description: List of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    put:
+      summary: Update a book
+      description: Idempotent request to update an existing book.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "200":
+          description: Book updated successfully
+    post:
+      summary: Add a new book
+      description: Create a new book in the library system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "201":
+          description: Book created successfully
+    delete:
+      summary: Delete a book
+      description: Remove a book by its ID.
+      parameters:
+      - name: bookId
+        in: query
+        description: ID of the book to delete
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Book deleted successfully
+  /authors:
+    get:
+      summary: Get a list of authors
+      description: Retrieve a list of authors with optional filters by authorName.
+      parameters:
+      - name: authorName
+        in: query
+        description: Filter authors by their name.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    put:
+      summary: Update an author
+      description: Idempotent request to update an existing author.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "200":
+          description: Author updated successfully
+    post:
+      summary: Add a new author
+      description: Create a new author in the library system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "201":
+          description: Author created successfully
+    delete:
+      summary: Delete an author
+      description: Remove an author by their ID.
+      parameters:
+      - name: authorId
+        in: query
+        description: ID of the author to delete
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Author deleted successfully
 components:
   schemas:
     Book:
